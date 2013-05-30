@@ -6,128 +6,140 @@ require_relative 'user.rb'
 class Bank
 
 
-	def initialize
+		def initialize
 
-		@user_list = Clientlist.new
-		@current_user = nil
-		@logged = false
-
-	    @methods1 = [
-	      "exit",
-	      "log_in",
-	      "create_user"
-	      ]
-	     @methods2 = [
-	     	"exit",
-	     	"withdraw",
-	     	"deposit",
-	     	"see_balance"
-	     ]
-	end
-
-
-	def menu1
-			
-			puts "Select an option"
-			puts "1 - Log in"
-			puts "2 - Create Account"
-			puts "0 - Exit"
-	end
+				@user_list = Clientlist.new
+				@current_user = nil
+				@logged = false
+			    @methods1 = [
+				      "exit",
+				      "log_in",
+				      "create_user"
+			      ]
+			     @methods2 = [
+				     	"exit",
+				     	"withdraw",
+				     	"deposit",
+				     	"see_balance"
+			     ]
+		end
 
 
-	def menu2
+		def menu1
 
-			puts "Select an option"
-			puts "1 - Withdraw"
-			puts "2 - Deposit"
-			puts "3 - See your balance"
-			puts "0 - Exit"
-	
-	end
-
-
-	def create_user
-
-		puts "Enter the username"
-		login = gets.chomp
-		puts "Enter the password"
-		pass = gets.chomp
-		@user_list.sign_up(User.new({login: login, pass: pass}))
-
-	end
+				logged = @logged
+				if logged
+						self.menu2
+				else
+				puts "Select an option"
+				puts "1 - Log in"
+				puts "2 - Create Account"
+				puts "0 - Exit"
+				end
+		end
 
 
-	def log_in
+		def menu2
+
+				puts "Select an option"
+				puts "1 - Withdraw"
+				puts "2 - Deposit"
+				puts "3 - See your balance"
+				puts "0 - Exit"
 		
-		puts "Enter the username"
-		login = gets.chomp
-		puts "Enter the password"
-		pass = gets.chomp
-
-		@current_user = @user_list.sign_in(User.new({login: login, pass: pass}))
-		logged = true
-
-	end
+		end
 
 
-	def withdraw
+		def create_user
 
-		puts "How much do you want to withdraw?"
-		quantity = gets.to_i
-		Withdraw.new(quantity)
+				puts "Enter the username"
+				login = gets.chomp
+				puts "Enter the password"
+				pass = gets.chomp
+				@user_list.sign_up(User.new({login: login, pass: pass}))
 
-	end
-
-
-	def deposit
-
-		puts "How much do you want to deposit?"
-		quantity = gets.to_i
-		Deposit.new(quantity)
-
-	end
+		end
 
 
-	def see_balance
+		def log_in
+				logged = @logged
+				puts "Enter the username"
+				login = gets.chomp
+				puts "Enter the password"
+				pass = gets.chomp
 
-		puts "Your balance is: #{user.balance}"
-
-	end
-
-
-	def exit
-
-		Process.exit(0)
-
-	end
-
-
-	def main
-		loged = @logged
-		puts "****************"
-		puts "Bank manager!"
-		puts "****************"
-		puts ""
-		puts ""
-		puts "What do you want to do?"
-
-		menu1
+				@current_user = @user_list.sign_in(User.new({login: login, pass: pass}))
+				if @current_user == nil
+						puts "username or password do not exist"
+						puts 
+						puts 
+				else
+				logged = true
+				@logged = logged
+				end
+		end
 
 
-	    option = gets.to_i
-	    
-	    loop {
-	    	if loged == false
-	      		self.send(@methods1[option])
-	      		menu1
-	      		option = gets.to_i
-	  		else
-	  			self.send(@methods2[option])
-	  			menu2
-	  			option = gets.to_i
-	  		end
-	    }
-	end
+		def withdraw
+
+				puts "How much do you want to withdraw?"
+				quantity = gets.to_i
+				Withdraw.new(quantity)
+
+		end
+
+
+		def deposit
+
+				puts "How much do you want to deposit?"
+				quantity = gets.to_i
+				Deposit.new(quantity)
+
+		end
+
+
+		def see_balance
+
+				puts "Your balance is: #{user.balance}"
+
+		end
+
+
+		def exit
+
+				Process.exit(0)
+
+		end
+
+
+		def main
+				loged = @logged
+				puts "****************"
+				puts "Bank manager!"
+				puts "****************"
+				puts ""
+				puts ""
+				puts "What do you want to do?"
+
+				menu1
+
+
+			    option = gets.to_i
+			    
+			    loop {
+			    	loged = @logged
+
+				    	if loged
+					  			self.send(@methods2[option])
+					  			menu2
+					      		option = gets.to_i
+				  		else
+					      		self.send(@methods1[option])
+					      		menu1
+					  			option = gets.to_i
+				  		end
+			    }
+		end
 end
 
 app = Bank.new
