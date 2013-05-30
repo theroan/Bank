@@ -32,8 +32,11 @@ class Bank
 						self.menu2
 				else
 				puts "Select an option"
+				puts
 				puts "1 - Log in"
+				puts
 				puts "2 - Create Account"
+				puts
 				puts "0 - Exit"
 				end
 		end
@@ -41,10 +44,15 @@ class Bank
 
 		def menu2
 
+				
 				puts "Select an option"
+				puts
 				puts "1 - Withdraw"
+				puts
 				puts "2 - Deposit"
+				puts
 				puts "3 - See your balance"
+				puts
 				puts "0 - Exit"
 		
 		end
@@ -70,6 +78,8 @@ class Bank
 
 				@current_user = @user_list.sign_in(User.new({login: login, pass: pass}))
 				if @current_user == nil
+						puts
+						puts
 						puts "username or password do not exist"
 						puts 
 						puts 
@@ -81,27 +91,39 @@ class Bank
 
 
 		def withdraw
-
+				user = @current_user
+				puts
+				puts
 				puts "How much do you want to withdraw?"
+				puts
+				puts
 				quantity = gets.to_i
-				Withdraw.new(quantity)
+				Withdraw.new(user, quantity)
 
 		end
 
 
 		def deposit
-
+				user = @current_user
+				puts
+				puts
 				puts "How much do you want to deposit?"
+				puts
+				puts
 				quantity = gets.to_i
-				Deposit.new(quantity)
+				Deposit.new(user, quantity)
 
 		end
 
 
 		def see_balance
-
+				user = @current_user
+ 				puts
+				puts
 				puts "Your balance is: #{user.balance}"
-
+				puts
+				puts
+				
 		end
 
 
@@ -120,7 +142,9 @@ class Bank
 				puts ""
 				puts ""
 				puts "What do you want to do?"
-
+				puts
+				puts
+				puts	
 				menu1
 
 
@@ -128,7 +152,8 @@ class Bank
 			    
 			    loop {
 			    	loged = @logged
-
+			    			puts
+			    			puts
 				    	if loged
 					  			self.send(@methods2[option])
 					  			menu2

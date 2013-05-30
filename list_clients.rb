@@ -9,12 +9,6 @@ class Clientlist < Hash
 						puts
 						puts
 						return self[user.login]
-				else
-						puts
-						puts
-						puts "Can't log in. Username or password not found."
-						puts
-						puts
 				end
 		end
 	

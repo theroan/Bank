@@ -1,7 +1,7 @@
 require_relative 'user.rb'
 class Withdraw
-		def initialize(quantity)
-				user_balance = User.balance
+		def initialize(user, quantity)
+				user_balance = user.balance
 				if user_balance >= quantity
 						user_balance -= quantity
 						puts
@@ -16,6 +16,6 @@ class Withdraw
 						puts
 						puts
 				end
-				User.balance = user_balance
+				user.balance = user_balance
 		end
 end
